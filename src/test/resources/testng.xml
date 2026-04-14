@@ -1,0 +1,24 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="SeleniumPOM Suite" verbose="1">
+
+    <!-- ── Login Tests ───────────────────────────────────────────────────── -->
+    <test name="Login Tests">
+        <groups>
+            <run>
+                <include name="login"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="tests.LoginTests"/>
+        </classes>
+    </test>
+
+    <!-- ── Exception Page Tests ──────────────────────────────────────────── -->
+    <test name="Exception Page Tests">
+        <classes>
+            <class name="tests.ExceptionTests"/>
+        </classes>
+    </test>
+
+</suite>

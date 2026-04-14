@@ -33,7 +33,6 @@
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>7.12.0</version>
-            <!-- FIX 3: must be test scope -->
             <scope>test</scope>
         </dependency>
 
@@ -45,7 +44,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <!-- FIX 4: 3.5.x required for TestNG 7.10+ compatibility -->
-                <version>3.5.3</version>
+                <version>3.5.5</version>
                 <configuration>
                     <suiteXmlFiles>
                         <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
