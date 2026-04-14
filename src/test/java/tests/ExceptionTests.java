@@ -7,7 +7,6 @@ import pages.ExceptionPage;
 
 /**
  * ExceptionTests — scenarios for the Practice Test Exceptions page.
- *
  * Covers: element visibility, interactability, dynamic content after actions.
  */
 public class ExceptionTests extends BaseTest {
@@ -24,7 +23,7 @@ public class ExceptionTests extends BaseTest {
                 "Add button should be visible on page load");
     }
 
-    @Test(description = "TC-EX-P-02: Clicking Add reveals Row 2 input")
+    @Test(description = "TC-EX-P-02: Clicking Add reveals Row 2 input for new entry")
     public void clickingAddRevealsRow2() {
         ExceptionPage page = new ExceptionPage(driver).open();
         page.clickAdd();
@@ -50,16 +49,18 @@ public class ExceptionTests extends BaseTest {
                 "Exception page should have at least 2 buttons. Found: " + page.getButtonCount());
     }
 
-    @Test(description = "TC-EX-P-05: Typing in Row 2 and saving shows confirmation")
-    public void typingInRow2AndSavingShowsConfirmation() {
+    @Test(description = "TC-EX-P-05: Editing Row 1 and saving shows confirmation")
+    public void editingRow1AndSavingShowsConfirmation() {
         ExceptionPage page = new ExceptionPage(driver).open();
-        page.clickAdd();
-        page.typeInRow2("Gri");
+
+        // FIX: correct flow is Edit → type in Row 1 → Save (not Add)
+        page.clickEdit();
+        page.typeInRow1("Selenium");
         page.clickSave();
 
         String confirmation = page.getConfirmationText();
         Assert.assertFalse(confirmation.isEmpty(),
-                "Confirmation message should appear after saving Row 2");
+                "Confirmation message should appear after editing and saving Row 1");
     }
 
     // ═════════════════════════════════════════════════════════════════════════
@@ -68,6 +69,7 @@ public class ExceptionTests extends BaseTest {
 
     @Test(description = "TC-EX-N-01: Row 2 is NOT visible before clicking Add")
     public void row2NotVisibleBeforeClickingAdd() {
+        // FIX: removed local 'WebDriver driver = null' — use inherited driver from BaseTest
         ExceptionPage page = new ExceptionPage(driver).open();
 
         Assert.assertFalse(page.isRow2Displayed(),

@@ -10,7 +10,7 @@ import java.time.Duration;
 import java.util.List;
 
 /**
- * Page Object for: https://practicetestautomation.com/practice-test-exceptions/
+ * Page Object for:<a href="https://practicetestautomation.com/practice-test-exceptions">...</a>...</a>
  */
 public class ExceptionPage {
 
@@ -51,12 +51,6 @@ public class ExceptionPage {
         return this;
     }
 
-    public ExceptionPage clickSave() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(saveButton));
-        driver.findElement(saveButton).click();
-        return this;
-    }
-
     public ExceptionPage typeInRow1(String text) {
         WebElement input = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(row1Input));
@@ -65,11 +59,20 @@ public class ExceptionPage {
         return this;
     }
 
+    // Remove the premature save button wait — just type and return
     public ExceptionPage typeInRow2(String text) {
         WebElement input = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(row2Input));
         input.clear();
         input.sendKeys(text);
+        return this;
+    }
+
+    public ExceptionPage clickSave() {
+        // save_btn only appears after clicking Edit, not after Add
+        wait.until(ExpectedConditions.visibilityOfElementLocated(saveButton));
+        wait.until(ExpectedConditions.elementToBeClickable(saveButton));
+        driver.findElement(saveButton).click();
         return this;
     }
 
