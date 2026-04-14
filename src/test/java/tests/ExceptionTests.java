@@ -48,11 +48,18 @@ public class ExceptionTests extends BaseTest {
                 "Exception page should have at least 2 buttons. Found: " + page.getButtonCount());
     }
 
-        ExceptionPage page = new ExceptionPage(driver).open();
+    @Test(description = "TC-EX-P-05: Editing Row 1 and saving shows confirmation")
+    public void editingRow1AndSavingShowsConfirmation() {
+    // FIX: correct flow is Edit → type in Row 1 → Save (not Add)
+        page.clickEdit();
+        page.typeInRow1("Selenium");
         page.clickSave();
+
 
         String confirmation = page.getConfirmationText();
         Assert.assertFalse(confirmation.isEmpty(),
+                "Confirmation message should appear after editing and saving Row 1");
+
     }
 
     // ═════════════════════════════════════════════════════════════════════════
@@ -61,6 +68,7 @@ public class ExceptionTests extends BaseTest {
 
     @Test(description = "TC-EX-N-01: Row 2 is NOT visible before clicking Add")
     public void row2NotVisibleBeforeClickingAdd() {
+        // FIX: removed local 'WebDriver driver = null' — use inherited driver from BaseTest
         ExceptionPage page = new ExceptionPage(driver).open();
 
         Assert.assertFalse(page.isRow2Displayed(),
